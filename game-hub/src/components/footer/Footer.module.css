@@ -1,9 +1,14 @@
 .footer {
     background-color: var(--color-secondary);
+}
+
+.footer div {
+    max-width: var(--container-max-width);
     color: var(--color-primary);
-    height: 100px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
