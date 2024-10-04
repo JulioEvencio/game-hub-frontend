@@ -5,11 +5,11 @@
 }
 
 :root {
-    --color-primary: #fffaff;
-    --color-secondary: #6f6b6f;
+    --color-primary: #f8f8f8;
+    --color-secondary: #333333;
     --color-text: #0C0C0C;
-    --color-success: #156815;
-    --color-error: #b10f0f;
+    --color-success: #388e3c;
+    --color-error: #d32f2f;
 
     --font-title: serif;
     --font-paragraph: sans-serif;
@@ -31,8 +31,13 @@ body {
 main {
     max-width: var(--container-max-width);
     padding: 10px;
-    margin: 0 auto;
+    margin: 1em auto;
     min-height: calc(100vh - 200px);
+}
+
+hr {
+    color: var(--color-secondary);
+    margin: 1em 0;
 }
 
 h1, h2, h3 {
@@ -70,6 +75,42 @@ a:hover {
 	text-decoration: underline;
 }
 
+button {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    font-weight: bold;
+    padding: 0 1.5em;
+    min-width: 3em;
+    min-height: 3em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1em;
+    padding: 1em;
+}
+
+label {
+    font-size: 1.3em;
+    font-family: var(--font-paragraph);
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    font-size: 0.8em;
+}
+
 @media (max-width: 600px) {
     h1 {
         font-size: 1.3em;
@@ -85,5 +126,9 @@ a:hover {
 
     p, a, button, input, .message {
         font-size: 0.9em;
+    }
+
+    label {
+        font-size: 1em;
     }
 }
