@@ -3,7 +3,10 @@ import styles from './Header.module.css'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
+import { useAuthContext } from '../../hooks/useAuthContext'
+
 function Header() {
+    const { tokenContext } = useAuthContext()
     const [menuMobileActivated, setMenuMobileActivated] = useState(false)
 
     const handlerMenuMobileButton = (value) => {
@@ -25,13 +28,31 @@ function Header() {
                             <NavLink to='/' onClick={() => handlerMenuMobileButton(false)}>Home</NavLink>
                         </li>
 
-                        <li>
-                            <NavLink to='/login' onClick={() => handlerMenuMobileButton(false)}>Login</NavLink>
-                        </li>
+                        {
+                            tokenContext != null &&
+                            <>
+                                <li>
+                                    <NavLink to='/profile' onClick={() => handlerMenuMobileButton(false)}>Profile</NavLink>
+                                </li>
 
-                        <li>
-                            <NavLink to='/register' onClick={() => handlerMenuMobileButton(false)}>Register</NavLink>
-                        </li>
+                                <li>
+                                    <NavLink to='/logout' onClick={() => handlerMenuMobileButton(false)}>Logout</NavLink>
+                                </li>
+                            </>
+                        }
+
+                        {
+                            tokenContext == null &&
+                            <>
+                                <li>
+                                    <NavLink to='/login' onClick={() => handlerMenuMobileButton(false)}>Login</NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to='/register' onClick={() => handlerMenuMobileButton(false)}>Register</NavLink>
+                                </li>
+                            </>
+                        }
                     </ul>
                 </nav>
             </div>

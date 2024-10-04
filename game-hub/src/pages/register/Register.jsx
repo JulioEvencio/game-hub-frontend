@@ -1,8 +1,13 @@
 import styles from './Register.module.css'
 
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 function Register() {
+    const { setTokenContext, setUsernameContext } = useAuthContext()
+
     const [loading, setLoading] = useState(false)
 
     const [username, setUsername] = useState('')
@@ -13,27 +18,48 @@ function Register() {
     const [hasErrors, setHasErrors] = useState(false)
     const [errors, setErrors] = useState([])
 
-    const handlerSubmit = async (e) => {
-        setLoading(true)
+    const navigate = useNavigate()
 
+    const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (password !== repeatPassword) {
+        setLoading(true)
+
+        if (password === repeatPassword) {
+            registerUser()
+        } else {
             setHasErrors(true)
             setErrors(['the passwords are different'])
             setLoading(false)
-            return
         }
+    }
 
+    async function registerUser() {
         const data = {
             username,
             email,
             password
         }
 
-        console.log(data)
+        const res = await fetch('http://localhost:8080/v1/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
 
-        setLoading(false)
+        const json = await res.json()
+
+        if (res.status === 201) {
+            setTokenContext(json.accessToken)
+            setUsernameContext(json.username)
+            navigate('/profile')
+        } else {
+            setHasErrors(true)
+            setErrors(json.errors)
+            setLoading(false)
+        }
     }
 
     return (
@@ -42,7 +68,7 @@ function Register() {
             <hr />
 
             <div>
-                <form onSubmit={handlerSubmit}>
+                <form onSubmit={handleSubmit}>
                     {
                         hasErrors &&
                         <div>
