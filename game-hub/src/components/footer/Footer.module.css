@@ -12,3 +12,7 @@
     align-items: center;
     margin: auto;
 }
+
+.footer a {
+    color: var(--color-primary);
+}
