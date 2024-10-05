@@ -34,7 +34,6 @@ function Register() {
 
             if (response.errors.length === 0) {
                 const auth = {
-                    username: response.body.username,
                     accessToken: response.body.accessToken
                 }
 

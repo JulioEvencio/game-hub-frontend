@@ -10,11 +10,12 @@
 }
 
 .register > div > form > div > ul {
-    padding-left: 1em;
+    padding-left: 2em;
 }
 
 .register form {
     width: calc(var(--container-max-width) / 2);
+    padding: 2em;
     border: 1px solid var(--color-secondary);
 }
 

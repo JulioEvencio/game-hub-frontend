@@ -6,7 +6,6 @@ function Profile() {
     return (
         <div>
             <h1>Profile</h1>
-            <p>{authContext.username}</p>
             <p>{authContext.accessToken}</p>
         </div>
     )
