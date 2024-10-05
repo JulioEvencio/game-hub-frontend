@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 function Header() {
-    const { tokenContext } = useAuthContext()
+    const { authContext } = useAuthContext()
     const [menuMobileActivated, setMenuMobileActivated] = useState(false)
 
     const handlerMenuMobileButton = (value) => {
@@ -29,29 +29,30 @@ function Header() {
                         </li>
 
                         {
-                            tokenContext != null &&
-                            <>
-                                <li>
-                                    <NavLink to='/profile' onClick={() => handlerMenuMobileButton(false)}>Profile</NavLink>
-                                </li>
+                            authContext == null ?
+                                (
+                                    <>
+                                        <li>
+                                            <NavLink to='/login' onClick={() => handlerMenuMobileButton(false)}>Login</NavLink>
+                                        </li>
 
-                                <li>
-                                    <NavLink to='/logout' onClick={() => handlerMenuMobileButton(false)}>Logout</NavLink>
-                                </li>
-                            </>
-                        }
+                                        <li>
+                                            <NavLink to='/register' onClick={() => handlerMenuMobileButton(false)}>Register</NavLink>
+                                        </li>
+                                    </>
+                                )
+                                :
+                                (
+                                    <>
+                                        <li>
+                                            <NavLink to='/profile' onClick={() => handlerMenuMobileButton(false)}>Profile</NavLink>
+                                        </li>
 
-                        {
-                            tokenContext == null &&
-                            <>
-                                <li>
-                                    <NavLink to='/login' onClick={() => handlerMenuMobileButton(false)}>Login</NavLink>
-                                </li>
-
-                                <li>
-                                    <NavLink to='/register' onClick={() => handlerMenuMobileButton(false)}>Register</NavLink>
-                                </li>
-                            </>
+                                        <li>
+                                            <NavLink to='/logout' onClick={() => handlerMenuMobileButton(false)}>Logout</NavLink>
+                                        </li>
+                                    </>
+                                )
                         }
                     </ul>
                 </nav>

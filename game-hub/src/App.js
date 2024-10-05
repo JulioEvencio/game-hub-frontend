@@ -1,20 +1,20 @@
-import './App.css';
+import './App.css'
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { useAuthContext } from './hooks/useAuthContext';
+import { useAuthContext } from './hooks/useAuthContext'
 
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Header from './components/header/Header'
+import Footer from './components/footer/Footer'
 
-import Home from './pages/home/Home';
-import Register from './pages/register/Register';
-import Profile from './pages/profile/Profile';
-import Logout from './pages/logout/Logout';
-import Login from './pages/login/Login';
+import Home from './pages/home/Home'
+import Register from './pages/register/Register'
+import Profile from './pages/profile/Profile'
+import Logout from './pages/logout/Logout'
+import Login from './pages/login/Login'
 
 function App() {
-	const { tokenContext } = useAuthContext()
+	const { authContext } = useAuthContext()
 
 	return (
 		<div className="App">
@@ -24,10 +24,10 @@ function App() {
 				<main>
 					<Routes>
 						<Route path='/' element={<Home />} />
-						<Route path='/profile' element={(tokenContext != null) ? <Profile /> : <Login />} />
-						<Route path='/logout' element={(tokenContext != null) ? <Logout /> : <Login />} />
-						<Route path='/Login' element={(tokenContext == null) ? <Login /> : <Profile />} />
-						<Route path='/register' element={(tokenContext == null) ? <Register /> : <Profile />} />
+						<Route path='/profile' element={authContext != null ? <Profile /> : <Login />} />
+						<Route path='/logout' element={authContext != null ? <Logout /> : <Login />} />
+						<Route path='/login' element={authContext == null ? <Login /> : <Profile />} />
+						<Route path='/register' element={authContext == null ? <Register /> : <Profile />} />
 					</Routes>
 				</main>
 

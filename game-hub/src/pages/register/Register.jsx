@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
 
+import { registerUser } from '../../services/authService.js'
+
 function Register() {
-    const { setTokenContext, setUsernameContext } = useAuthContext()
+    const { setAuthContext } = useAuthContext()
 
     const [loading, setLoading] = useState(false)
 
@@ -20,46 +22,36 @@ function Register() {
 
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         setLoading(true)
+        setHasErrors(false)
 
         if (password === repeatPassword) {
-            registerUser()
+            const data = { username, email, password }
+            const response = await registerUser(data)
+
+            if (response.errors.length === 0) {
+                const auth = {
+                    username: response.body.username,
+                    accessToken: response.body.accessToken
+                }
+
+                setAuthContext(auth)
+                navigate('/profile')
+            } else {
+                showErrors(response.errors)
+            }
         } else {
-            setHasErrors(true)
-            setErrors(['the passwords are different'])
-            setLoading(false)
+            showErrors(['the passwords are different'])
         }
     }
 
-    async function registerUser() {
-        const data = {
-            username,
-            email,
-            password
-        }
-
-        const res = await fetch('http://localhost:8080/v1/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-
-        const json = await res.json()
-
-        if (res.status === 201) {
-            setTokenContext(json.accessToken)
-            setUsernameContext(json.username)
-            navigate('/profile')
-        } else {
-            setHasErrors(true)
-            setErrors(json.errors)
-            setLoading(false)
-        }
+    function showErrors(err) {
+        setHasErrors(true)
+        setErrors(err)
+        setLoading(false)
     }
 
     return (
@@ -105,13 +97,10 @@ function Register() {
                     </label>
 
                     {
-                        !loading &&
-                        <button type='submit'>Create account</button>
-                    }
-                    
-                    {
-                        loading &&
+                        loading ?
                         <button type='submit' disabled>Wait a moment...</button>
+                        :
+                        <button type='submit'>Create account</button>
                     }
                 </form>
 

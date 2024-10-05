@@ -1,13 +1,13 @@
-import { useAuthContext } from "../../hooks/useAuthContext"
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 function Profile() {
-    const { tokenContext, usernameContext } = useAuthContext()
+    const { authContext } = useAuthContext()
     
     return (
         <div>
             <h1>Profile</h1>
-            <p>{usernameContext}</p>
-            <p>{tokenContext}</p>
+            <p>{authContext.username}</p>
+            <p>{authContext.accessToken}</p>
         </div>
     )
 }

@@ -1,13 +1,16 @@
-import { useNavigate } from "react-router-dom"
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { useAuthContext } from "../../hooks/useAuthContext"
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 function Logout() {
     const navigate = useNavigate()
-    const { setTokenContext } = useAuthContext()
+    const { setAuthContext } = useAuthContext()
 
-    setTokenContext(null)
-    navigate('/login')
+    useEffect(() => {
+        setAuthContext(null)
+        navigate('/login')
+    })
 
     return (
         <div>
