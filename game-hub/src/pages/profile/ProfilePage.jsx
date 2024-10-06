@@ -1,10 +1,10 @@
-import styles from './Profile.module.css'
+import styles from './ProfilePage.module.css'
 
 import { useNavigate } from 'react-router-dom'
 
 import GameComponent from '../../components/game/GameComponent'
 
-function Profile() {
+function ProfilePage() {
     const games = [
         {
             username: 'username',
@@ -76,4 +76,4 @@ function Profile() {
     )
 }
 
-export default Profile
+export default ProfilePage

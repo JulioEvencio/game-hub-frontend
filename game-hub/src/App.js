@@ -4,14 +4,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { useAuthContext } from './hooks/useAuthContext'
 
-import Header from './components/header/Header'
-import Footer from './components/footer/Footer'
+import HeaderComponent from './components/header/HeaderComponent'
+import FooterComponent from './components/footer/FooterComponent'
 
-import Home from './pages/home/Home'
-import Register from './pages/register/Register'
-import Profile from './pages/profile/Profile'
-import Logout from './pages/logout/Logout'
-import Login from './pages/login/Login'
+import HomePage from './pages/home/HomePage'
+import RegisterPage from './pages/register/RegisterPage'
+import ProfilePage from './pages/profile/ProfilePage'
+import LogoutPage from './pages/logout/LogoutPage'
+import LoginPage from './pages/login/LoginPage'
 
 function App() {
 	const { authContext } = useAuthContext()
@@ -19,19 +19,19 @@ function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
-				<Header />
+				<HeaderComponent />
 
 				<main>
 					<Routes>
-						<Route path='/' element={<Home />} />
-						<Route path='/profile' element={authContext != null ? <Profile /> : <Login />} />
-						<Route path='/logout' element={authContext != null ? <Logout /> : <Login />} />
-						<Route path='/login' element={authContext == null ? <Login /> : <Profile />} />
-						<Route path='/register' element={authContext == null ? <Register /> : <Profile />} />
+						<Route path='/' element={<HomePage />} />
+						<Route path='/profile' element={authContext != null ? <ProfilePage /> : <LoginPage />} />
+						<Route path='/logout' element={authContext != null ? <LogoutPage /> : <LoginPage />} />
+						<Route path='/login' element={authContext == null ? <LoginPage /> : <ProfilePage />} />
+						<Route path='/register' element={authContext == null ? <RegisterPage /> : <ProfilePage />} />
 					</Routes>
 				</main>
 
-				<Footer />
+				<FooterComponent />
 			</BrowserRouter>
 		</div>
 	);

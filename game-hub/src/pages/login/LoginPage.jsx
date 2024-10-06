@@ -1,4 +1,4 @@
-import styles from './Login.module.css'
+import styles from './LoginPage.module.css'
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { loginUser } from '../../services/authService'
 
-function Login() {
+function LoginPage() {
     const { setAuthContext } = useAuthContext()
 
     const [loading, setLoading] = useState(false)
@@ -84,4 +84,4 @@ function Login() {
     )
 }
 
-export default Login
+export default LoginPage

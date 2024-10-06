@@ -1,6 +1,6 @@
-import styles from './Home.module.css'
+import styles from './HomePage.module.css'
 
-function Home() {
+function HomePage() {
     return (
         <div className={styles.home}>
             <h1>Home</h1>
@@ -8,4 +8,4 @@ function Home() {
     )
 }
 
-export default Home
+export default HomePage

@@ -1,11 +1,11 @@
-import styles from './Header.module.css'
+import styles from './HeaderComponent.module.css'
 
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
 
-function Header() {
+function HeaderComponent() {
     const { authContext } = useAuthContext()
     const [menuMobileActivated, setMenuMobileActivated] = useState(false)
 
@@ -61,4 +61,4 @@ function Header() {
     )
 }
 
-export default Header
+export default HeaderComponent

@@ -1,13 +1,13 @@
-import styles from './Register.module.css'
+import styles from './RegisterPage.module.css'
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAuthContext } from '../../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext.jsx'
 
 import { registerUser } from '../../services/authService.js'
 
-function Register() {
+function RegisterPage() {
     const { setAuthContext } = useAuthContext()
 
     const [loading, setLoading] = useState(false)
@@ -119,4 +119,4 @@ function Register() {
     )
 }
 
-export default Register
+export default RegisterPage

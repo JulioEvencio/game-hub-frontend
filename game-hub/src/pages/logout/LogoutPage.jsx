@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
 
-function Logout() {
+function LogoutPage() {
     const navigate = useNavigate()
     const { setAuthContext } = useAuthContext()
 
@@ -19,4 +19,4 @@ function Logout() {
     )
 }
 
-export default Logout
+export default LogoutPage

@@ -1,8 +1,8 @@
-import styles from './Footer.module.css'
+import styles from './FooterComponent.module.css'
 
 import { Link } from 'react-router-dom'
 
-function Footer() {
+function FooterComponent() {
     return (
         <footer className={styles.footer}>
             <div>
@@ -14,4 +14,4 @@ function Footer() {
     )
 }
 
-export default Footer
+export default FooterComponent
