@@ -17,6 +17,10 @@
     border: 1px solid var(--color-secondary);
 }
 
+.user figure {
+    min-width: 200px;
+}
+
 .user img {
     border-radius: 100%;
     border: 3px solid var(--color-secondary);

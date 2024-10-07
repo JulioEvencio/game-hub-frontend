@@ -1,32 +1,35 @@
 import styles from './ProfilePage.module.css'
 
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import GameComponent from '../../components/game/GameComponent'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import { getLoggedUser } from './../../services/userService'
 
 function ProfilePage() {
-    const games = [
-        {
-            username: 'username',
-            name: 'Silmance',
-            picture: 'https://img.itch.zone/aW1nLzE2MDM3OTM3LnBuZw==/315x250%23c/ZQl0Is.png',
-            slug: 'silmance'
-        },
-        {
-            username: 'username',
-            name: 'Control Pixel',
-            picture: 'https://img.itch.zone/aW1nLzE1MTYwNDUzLnBuZw==/315x250%23c/BVdcyx.png',
-            slug: 'control-pixel'
-        },
-        {
-            username: 'username',
-            name: 'Dyrvania',
-            picture: 'https://img.itch.zone/aW1nLzE1NDE3MzcwLnBuZw==/315x250%23c/vG4cIJ.png',
-            slug: 'dyrvania'
-        }
-    ]
-
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState()
+    const { authContext, setAuthContext } = useAuthContext()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        async function loadUser() {
+            setLoading(true)
+
+            const result = await getLoggedUser({ accessToken: authContext.accessToken })
+
+            if (result.errors.length === 0) {
+                setUser(result.body)
+            } else {
+                setAuthContext(null)
+            }
+
+            setLoading(false)
+        }
+
+        loadUser()
+    }, [authContext, setAuthContext])
 
     const handlePublishGame = () => {
         // Code
@@ -42,36 +45,45 @@ function ProfilePage() {
 
     return (
         <div className={styles.profile}>
-            <section className={styles.user}>
-                <figure>
-                    <img src={`https://api.dicebear.com/9.x/bottts/svg?seed=${games[0].user}`} alt='Profile'></img>
-                </figure>
+            {
+                loading ?
+                    <>
+                        <h1>Loading</h1>
+                    </>
+                    :
+                    <>
+                        <section className={styles.user}>
+                            <figure>
+                                <img src={`https://api.dicebear.com/9.x/bottts/svg?seed=${user.username}`} alt='Profile'></img>
+                            </figure>
 
-                <h1>Username</h1>
+                            <h1>{user.username}</h1>
 
-                <button onClick={handlePublishGame}>Publish game</button>
-                <button onClick={handleSettings}>Settings</button>
-                <button onClick={handleLogout}>Logout</button>
-            </section>
+                            <button onClick={handlePublishGame}>Publish game</button>
+                            <button onClick={handleSettings}>Settings</button>
+                            <button onClick={handleLogout}>Logout</button>
+                        </section>
 
-            <section className={styles.card}>
-                <h2>My Games</h2>
-                <hr />
+                        <section className={styles.card}>
+                            <h2>My Games</h2>
+                            <hr />
 
-                <div>
-                    {
-                        games.map((game, i) => (
-                            <GameComponent
-                                key={i}
-                                username={game.username}
-                                name={game.name}
-                                slug={game.slug}
-                                src={game.picture}
-                            />
-                        ))
-                    }
-                </div>
-            </section>
+                            <div>
+                                {
+                                    user.games.map((game) => (
+                                        <GameComponent
+                                            key={game.id}
+                                            username={user.username}
+                                            name={game.name}
+                                            slug={game.slug}
+                                            src={game.pictureURL}
+                                        />
+                                    ))
+                                }
+                            </div>
+                        </section>
+                    </>
+            }
         </div>
     )
 }
