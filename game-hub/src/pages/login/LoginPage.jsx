@@ -25,8 +25,7 @@ function LoginPage() {
         setLoading(true)
         setHasErrors(false)
 
-        const data = { email, password }
-        const response = await loginUser(data)
+        const response = await loginUser({ email, password })
 
         if (response.errors.length === 0) {
             const auth = {

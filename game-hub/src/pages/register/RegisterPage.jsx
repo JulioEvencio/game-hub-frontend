@@ -29,8 +29,7 @@ function RegisterPage() {
         setHasErrors(false)
 
         if (password === repeatPassword) {
-            const data = { username, email, password }
-            const response = await registerUser(data)
+            const response = await registerUser({ username, email, password })
 
             if (response.errors.length === 0) {
                 const auth = {
