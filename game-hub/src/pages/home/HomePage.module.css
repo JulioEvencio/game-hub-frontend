@@ -1,0 +1,12 @@
+.home h1 {
+    margin-bottom: 1em;
+}
+
+.home section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+}
