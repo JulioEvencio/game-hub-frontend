@@ -2,10 +2,10 @@ import styles from './GameComponent.module.css'
 
 import { Link } from 'react-router-dom'
 
-function GameComponent({ username, name, slug, src }) {
+function GameComponent({ name, slug, src }) {
     return (
         <div className={styles.game}>
-            <Link to={`/${username}-game/${slug}`}>
+            <Link to={`/games/${slug}`}>
                 <figure>
                     <img src={src} alt='Game' />
                 </figure>

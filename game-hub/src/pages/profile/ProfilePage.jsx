@@ -32,7 +32,7 @@ function ProfilePage() {
     }, [authContext, setAuthContext])
 
     const handlePublishGame = () => {
-        // Code
+        navigate('/publish-game')
     }
 
     const handleSettings = () => {
@@ -54,7 +54,7 @@ function ProfilePage() {
                     <>
                         <section className={styles.user}>
                             <figure>
-                                <img src={`https://api.dicebear.com/9.x/bottts/svg?seed=${user.username}`} alt='Profile'></img>
+                                <img src={user.pictureURL} alt='Profile'></img>
                             </figure>
 
                             <h1>{user.username}</h1>
@@ -72,8 +72,7 @@ function ProfilePage() {
                                 {
                                     user.games.map((game) => (
                                         <GameComponent
-                                            key={game.id}
-                                            username={user.username}
+                                            key={game.uuid}
                                             name={game.name}
                                             slug={game.slug}
                                             src={game.pictureURL}

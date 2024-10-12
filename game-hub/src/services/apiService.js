@@ -1,6 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL
 
-export async function fetchAPI({ method, endpoint, headers, data }) {
+export async function fetchAPI({ method, endpoint, headers, data }, multipartFile = false) {
     const result = {
         body: null,
         errors: []
@@ -13,7 +13,7 @@ export async function fetchAPI({ method, endpoint, headers, data }) {
         }
 
         if (method !== 'GET' && data) {
-            options.body = JSON.stringify(data)
+            options.body = multipartFile ? data : JSON.stringify(data)
         }
 
         const response = await fetch(API_URL + endpoint, options)
