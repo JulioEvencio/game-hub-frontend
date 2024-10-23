@@ -10,10 +10,6 @@ export async function registerUser({ username, email, password }) {
         data: { username, email, password }
     })
 
-    if (result.errors.length === 0) {
-        return await loginUser({ email, password })
-    }
-
     return result
 }
 

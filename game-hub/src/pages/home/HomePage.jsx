@@ -13,10 +13,10 @@ function HomePage() {
         async function loadGames() {
             setLoading(true)
 
-            const result = await findAllGames()
+            const result = await findAllGames(0, 1000)
 
             if (result.errors.length === 0) {
-                setGames(result.body.games)
+                setGames(result.body.games.content)
                 setLoading(false)
             }
         }
@@ -39,10 +39,10 @@ function HomePage() {
                         {
                             games.map((game) => (
                                 <GameComponent
-                                    key={game.uuid}
+                                    key={game.id}
                                     name={game.name}
                                     slug={game.slug}
-                                    src={game.pictureURL}
+                                    src={game.coverImageUrl}
                                 />
                             ))
                         }

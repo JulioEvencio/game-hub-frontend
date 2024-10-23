@@ -1,21 +1,27 @@
 import { fetchAPI } from "./apiService"
 
-export async function findAllGames() {
+export async function findAllGames(page = 0, size = 10) {
     return await fetchAPI({
         method: 'GET',
-        endpoint: '/games',
+        endpoint: `/games?page=${page}&size=${size}&sort=createdAt,desc`,
         headers: {
             'Content-Type': 'application/json'
         }
     })
 }
 
-export async function publishGame({ accessToken, name, picture, file }) {
+export async function publishGame({ accessToken, name, description, coverImage, file, screenshots }) {
     const formData = new FormData()
 
     formData.append('name', name)
-    formData.append('picture', picture)
+    formData.append('description', description)
+    formData.append('coverImage', coverImage)
     formData.append('file', file)
+
+    for (let i = 0; i < screenshots.length; i++) {
+        console.log('TEST')
+        formData.append('screenshots', screenshots[i]);
+    }
 
     const result = await fetchAPI({
         method: 'POST',

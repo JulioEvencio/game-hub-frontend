@@ -12,8 +12,10 @@ function PublishGamePage() {
     const [loading, setLoading] = useState(false)
 
     const [name, setName] = useState('')
-    const [picture, setPicture] = useState(null)
+    const [description, setDescription] = useState('')
+    const [coverImage, setCoverImage] = useState(null)
     const [file, setFile] = useState(null)
+    const [screenshots, setScreenshots] = useState([])
 
     const [hasErrors, setHasErrors] = useState(false)
     const [errors, setErrors] = useState([])
@@ -29,8 +31,10 @@ function PublishGamePage() {
         const response = await publishGame({
             accessToken: authContext.accessToken,
             name: name,
-            picture: picture,
-            file: file
+            description: description,
+            coverImage: coverImage,
+            file: file,
+            screenshots: screenshots
         })
 
         if (response.errors.length === 0) {
@@ -41,6 +45,13 @@ function PublishGamePage() {
             setLoading(false)
         }
     }
+
+    const transformName = (value) => {
+        return value
+            .toLowerCase()
+            .replace(/[^a-z0-9_ ]/g, '_')
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    };
 
     return (
         <div className={styles.publish_game}>
@@ -65,17 +76,39 @@ function PublishGamePage() {
 
                 <label>
                     Name:<br />
-                    <input type='text' placeholder='Name' required onChange={(e) => setName(e.target.value)} value={name || ''} />
+                    <input
+                        type='text'
+                        placeholder='Name'
+                        required
+                        onChange={(e) => setName(transformName(e.target.value))}
+                        value={name || ''}
+                    />
                 </label>
 
                 <label>
-                    Picture:<br />
-                    <input type='file' accept='image/png, image/jpeg, image/jpg' required onChange={(e) => setPicture(e.target.files[0])} />
+                    Description:<br />
+                    <textarea
+                        placeholder='Description'
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description || ''}
+                        maxLength={10000}
+                    />
                 </label>
 
                 <label>
-                    File:<br />
+                    Cover Image:<br />
+                    <input type='file' accept='image/png, image/jpeg, image/jpg' required onChange={(e) => setCoverImage(e.target.files[0])} />
+                </label>
+
+                <label>
+                    File (.zip):<br />
                     <input type='file' accept='.zip' required onChange={(e) => setFile(e.target.files[0])} />
+                </label>
+
+                <label>
+                    Screenshots:<br />
+                    <input type='file' accept='image/png, image/jpeg, image/jpg' multiple required onChange={(e) => setScreenshots(e.target.files)} />
                 </label>
 
                 {

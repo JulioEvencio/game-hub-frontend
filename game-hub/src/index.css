@@ -119,6 +119,11 @@ input {
     font-size: 0.8em;
 }
 
+textarea {
+    width: 100%;
+    min-height: 10em;
+}
+
 @media (max-width: 600px) {
     h1 {
         font-size: 1.3em;

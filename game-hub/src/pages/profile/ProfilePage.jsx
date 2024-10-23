@@ -10,6 +10,7 @@ import { getLoggedUser } from './../../services/userService'
 function ProfilePage() {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState()
+    const [games, setGames] = useState([])
     const { authContext, setAuthContext } = useAuthContext()
     const navigate = useNavigate()
 
@@ -20,7 +21,8 @@ function ProfilePage() {
             const result = await getLoggedUser({ accessToken: authContext.accessToken })
 
             if (result.errors.length === 0) {
-                setUser(result.body)
+                setUser(result.body.user)
+                setGames(result.body.games)
             } else {
                 setAuthContext(null)
             }
@@ -70,12 +72,12 @@ function ProfilePage() {
 
                             <div>
                                 {
-                                    user.games.map((game) => (
+                                    games.map((game) => (
                                         <GameComponent
-                                            key={game.uuid}
+                                            key={game.id}
                                             name={game.name}
                                             slug={game.slug}
-                                            src={game.pictureURL}
+                                            src={game.coverImageUrl}
                                         />
                                     ))
                                 }
