@@ -14,6 +14,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import LogoutPage from './pages/logout/LogoutPage'
 import LoginPage from './pages/login/LoginPage'
 import PublishGamePage from './pages/publish_game/PublishGamePage'
+import NotFoundPage from './pages/not_found/NotFoundPage'
 
 function App() {
 	const { authContext } = useAuthContext()
@@ -32,6 +33,8 @@ function App() {
 						<Route path='/login' element={authContext == null ? <LoginPage /> : <ProfilePage />} />
 						<Route path='/register' element={authContext == null ? <RegisterPage /> : <ProfilePage />} />
 						<Route path='/logout' element={authContext != null ? <LogoutPage /> : <LoginPage />} />
+						<Route path='/not-found' element={<NotFoundPage />} />
+						<Route path='*' element={<NotFoundPage />} />
 					</Routes>
 				</main>
 
