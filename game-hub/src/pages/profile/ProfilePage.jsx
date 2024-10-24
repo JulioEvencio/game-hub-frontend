@@ -37,10 +37,6 @@ function ProfilePage() {
         navigate('/publish-game')
     }
 
-    const handleSettings = () => {
-        // Code
-    }
-
     const handleLogout = () => {
         navigate('/logout')
     }
@@ -62,7 +58,6 @@ function ProfilePage() {
                             <h1>{user.username}</h1>
 
                             <button onClick={handlePublishGame}>Publish game</button>
-                            <button onClick={handleSettings}>Settings</button>
                             <button onClick={handleLogout}>Logout</button>
                         </section>
 
