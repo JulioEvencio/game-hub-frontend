@@ -1,5 +1,15 @@
 import { fetchAPI } from "./apiService"
 
+export async function findGameBySlug(slug) {
+    return await fetchAPI({
+        method: 'GET',
+        endpoint: `/games/slug/${slug}`,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
 export async function findAllGames(page = 0, size = 10) {
     return await fetchAPI({
         method: 'GET',
@@ -19,7 +29,6 @@ export async function publishGame({ accessToken, name, description, coverImage, 
     formData.append('file', file)
 
     for (let i = 0; i < screenshots.length; i++) {
-        console.log('TEST')
         formData.append('screenshots', screenshots[i]);
     }
 

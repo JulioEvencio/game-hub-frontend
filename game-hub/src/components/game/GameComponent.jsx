@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function GameComponent({ name, slug, src }) {
     return (
         <div className={styles.game}>
-            <Link to={`/games/${slug}`}>
+            <Link to={`/game/${slug}`}>
                 <figure>
                     <img src={src} alt='Game' />
                 </figure>

@@ -1,0 +1,29 @@
+.game {
+    display: flex;
+    flex-direction: row;
+    gap: 0 1em;
+    justify-content: space-between;
+}
+
+.game > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.info h1, h2, p {
+    margin: 1em 0;
+}
+
+.game form > div {
+    color: var(--color-error);
+}
+
+.game form > div > ul {
+    padding-left: 2em;
+}
+
+.screenshots {
+    max-width: calc(var(--container-max-width) / 3);
+    margin-left: 2em;
+}

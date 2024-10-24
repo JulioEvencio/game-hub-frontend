@@ -3,8 +3,8 @@ import styles from './PublishGamePage.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAuthContext } from '../../../hooks/useAuthContext'
-import { publishGame } from '../../../services/gameService'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import { publishGame } from '../../services/gameService'
 
 function PublishGamePage() {
     const { authContext } = useAuthContext()
@@ -38,7 +38,7 @@ function PublishGamePage() {
         })
 
         if (response.errors.length === 0) {
-            navigate('/profile')
+            navigate('/game/' + response.body.game.slug)
         } else {
             setHasErrors(true)
             setErrors(response.errors)
