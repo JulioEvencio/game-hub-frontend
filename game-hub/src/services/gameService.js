@@ -3,7 +3,7 @@ import { fetchAPI } from "./apiService"
 export async function findGameBySlug(slug) {
     return await fetchAPI({
         method: 'GET',
-        endpoint: `/games/slug/${slug}`,
+        endpoint: `/api/games/slug/${slug}`,
         headers: {
             'Content-Type': 'application/json'
         }
@@ -13,7 +13,7 @@ export async function findGameBySlug(slug) {
 export async function findAllGames(page = 0, size = 10) {
     return await fetchAPI({
         method: 'GET',
-        endpoint: `/games?page=${page}&size=${size}&sort=createdAt,desc`,
+        endpoint: `/api/games?page=${page}&size=${size}&sort=createdAt,desc`,
         headers: {
             'Content-Type': 'application/json'
         }
@@ -34,7 +34,7 @@ export async function publishGame({ accessToken, name, description, coverImage, 
 
     const result = await fetchAPI({
         method: 'POST',
-        endpoint: '/games',
+        endpoint: '/api/games',
         headers: {
             'Authorization': `Bearer ${accessToken}`
         },

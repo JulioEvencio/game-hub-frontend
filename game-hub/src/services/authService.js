@@ -3,7 +3,7 @@ import { fetchAPI } from "./apiService"
 export async function registerUser({ username, email, password }) {
     const result = await fetchAPI({
         method: 'POST',
-        endpoint: '/auth/register',
+        endpoint: '/api/auth/register',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -16,7 +16,7 @@ export async function registerUser({ username, email, password }) {
 export async function loginUser({ email, password }) {
     return fetchAPI({
         method: 'POST',
-        endpoint: '/auth/login',
+        endpoint: '/api/auth/login',
         headers: {
             'Content-Type': 'application/json'
         },
