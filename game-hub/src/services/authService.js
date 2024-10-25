@@ -23,3 +23,15 @@ export async function loginUser({ email, password }) {
         data: { email, password }
     })
 }
+
+export async function passwordUpdate(accessToken, newPassword) {
+    return await fetchAPI({
+        method: 'PATCH',
+        endpoint: '/api/auth/password',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+        data: { newPassword }
+    })
+}

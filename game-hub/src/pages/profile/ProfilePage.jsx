@@ -37,6 +37,10 @@ function ProfilePage() {
         navigate('/publish-game')
     }
 
+    const handleUpdatePassword = () => {
+        navigate('/profile/password-update')
+    }
+
     const handleLogout = () => {
         navigate('/logout')
     }
@@ -58,6 +62,7 @@ function ProfilePage() {
                             <h1>{user.username}</h1>
 
                             <button onClick={handlePublishGame}>Publish game</button>
+                            <button onClick={handleUpdatePassword}>Update password</button>
                             <button onClick={handleLogout}>Logout</button>
                         </section>
 
