@@ -1,7 +1,7 @@
 import styles from './LoginPage.module.css'
 
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { loginUser } from '../../services/authService'
@@ -78,6 +78,8 @@ function LoginPage() {
                         :
                         <button type='submit'>Login</button>
                 }
+
+                <Link to='/password-recovery' target='_self'>Forgot password?</Link>
             </form>
         </div>
     )

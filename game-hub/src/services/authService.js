@@ -35,3 +35,14 @@ export async function passwordUpdate(accessToken, newPassword) {
         data: { newPassword }
     })
 }
+
+export async function passwordRecovery(email) {
+    return await fetchAPI({
+        method: 'POST',
+        endpoint: '/api/auth/password-recovery',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: { email }
+    })
+}

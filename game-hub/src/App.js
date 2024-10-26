@@ -16,6 +16,8 @@ import LoginPage from './pages/login/LoginPage'
 import PublishGamePage from './pages/publish_game/PublishGamePage'
 import NotFoundPage from './pages/not_found/NotFoundPage'
 import PasswordUpdatePage from './pages/password_update/PasswordUpdate'
+import PasswordRecoveryPage from './pages/password_recovery/PasswordRecoveryPage'
+import PasswordRecoveryTokenPage from './pages/password_recovery_token/PasswordRecoveryTokenPage'
 
 function App() {
 	const { authContext } = useAuthContext()
@@ -29,6 +31,8 @@ function App() {
 					<Routes>
 						<Route path='/' element={<HomePage />} />
 						<Route path='/game/:slug' element={<GamePage />} />
+						<Route path='/password-recovery/:token' element={<PasswordRecoveryTokenPage />} />
+						<Route path='/password-recovery' element={<PasswordRecoveryPage />} />
 						<Route path='/profile/password-update' element={authContext != null ? <PasswordUpdatePage /> : <LoginPage />} />
 						<Route path='/profile' element={authContext != null ? <ProfilePage /> : <LoginPage />} />
 						<Route path='/publish-game' element={authContext != null ? <PublishGamePage /> : <LoginPage />} />

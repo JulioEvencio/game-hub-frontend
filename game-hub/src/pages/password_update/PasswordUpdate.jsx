@@ -78,7 +78,7 @@ function PasswordUpdatePage() {
 
                 <label>
                     Confirm Password:<br />
-                    <input type='password' placeholder='Password' required onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword || ''}></input>
+                    <input type='password' placeholder='Confirm password' required onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword || ''}></input>
                 </label>
 
                 {
